@@ -1,5 +1,6 @@
 # connect-ensure-authenticated
 
+[![NPM version](https://img.shields.io/npm/v/connect-ensure-authenticated.svg)](https://www.npmjs.com/package/connect-ensure-authenticated)
 [![Build Status](https://travis-ci.com/allardvanderouw/connect-ensure-authenticated.svg?branch=master)](https://travis-ci.com/allardvanderouw/connect-ensure-authenticated)
 [![codecov](https://codecov.io/gh/allardvanderouw/connect-ensure-authenticated/branch/master/graph/badge.svg)](https://codecov.io/gh/allardvanderouw/connect-ensure-authenticated)
 
