@@ -23,7 +23,10 @@
     "test:coverage": "mkdir -p coverage/all && cp coverage/*/*.json coverage/all && nyc report --temp-directory=coverage/all --reporter html --reporter text && nyc check-coverage --temp-directory=coverage/all",
     "test:integration": "nyc --all --temp-directory=coverage/integration --reporter=text-summary mocha --timeout=10000 --reporter=spec $(find test -name '*.integration.test.js')",
     "test:unit": "nyc --all --temp-directory=coverage/unit --reporter=text-summary mocha --reporter=spec $(find test -name '*.unit.test.js')",
-    "test:unit:watch": "mocha --watch --growl --reporter=min $(find test -name '*.unit.test.js')"
+    "test:unit:watch": "mocha --watch --growl --reporter=min $(find test -name '*.unit.test.js')",
+    "nyc:test": "nyc mocha",
+    "nyc:report": "nyc report --reporter=text-lcov > coverage.lcov ./node_modules/.bin/codecov",
+    "report:coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "devDependencies": {
     "body-parser": "^1.18.3",

@@ -1,5 +1,8 @@
 # connect-ensure-authenticated
 
+[![Build Status](https://travis-ci.com/allardvanderouw/connect-ensure-authenticated.svg?branch=master)](https://travis-ci.com/allardvanderouw/connect-ensure-authenticated)
+[![codecov](https://codecov.io/gh/allardvanderouw/connect-ensure-authenticated/branch/master/graph/badge.svg)](https://codecov.io/gh/allardvanderouw/connect-ensure-authenticated)
+
 This simple middleware ensures that a user is logged in with Passport (https://github.com/jaredhanson/passport). If a request is received that is unauthenticated, the request returns a JSON error.
 
 ## Install
