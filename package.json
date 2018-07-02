@@ -1,6 +1,6 @@
 {
   "name": "connect-ensure-authenticated",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Login session ensuring middleware for Connect for API's.",
   "main": "./lib",
   "repository": "https://allardvanderouw@github.com/allardvanderouw/connect-ensure-authenticated.git",
