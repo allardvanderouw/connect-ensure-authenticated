@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.com/allardvanderouw/connect-ensure-authenticated.svg?branch=master)](https://travis-ci.com/allardvanderouw/connect-ensure-authenticated)
 [![codecov](https://codecov.io/gh/allardvanderouw/connect-ensure-authenticated/branch/master/graph/badge.svg)](https://codecov.io/gh/allardvanderouw/connect-ensure-authenticated)
 
-This simple middleware ensures that a user is logged in with Passport (https://github.com/jaredhanson/passport). If a request is received that is unauthenticated, the request returns a JSON error.
+This simple middleware ensures that a user is logged in with [Passport](https://github.com/jaredhanson/passport). If a request is received that is unauthenticated, the request returns a JSON error.
 
 ## Install
 
@@ -33,34 +33,36 @@ app.get('/api/whoami', ensureAuthenticated(), (req, res) => {
 });
 ```
       
-If a user is not logged in when attempting to access this page, the request will return a 401 status code with 
+If a user is not logged in when attempting to access this page, the request will return the default 401 status code with the default message "Authentication required".
 
-#### With unless
+#### Unless
 
-This middleware supports express-unless (https://github.com/jfromaniello/express-unless).
+This middleware supports [express-unless](https://github.com/jfromaniello/express-unless). This is useful because in some cases it might be better to ensure authentication on all API endpoints with the exception for a few specific API's (for example the login API and the password reset API).
 
 ```javascript
 const { ensureAuthenticated } = require('connect-ensure-authenticated');
 const app = express()
 
-app.use(ensureAuthenticated().unless({ path: ['/api/not-authenticated'] }));
+app.use(ensureAuthenticated().unless({
+  path: ['/api/login']
+}));
 
-app.get('/api/authenticated', (req, res) => {
+// The '/api/login' endpoint is noted in the unless configuration therefore no authentication is required
+app.get('/api/login', (req, res) => {
   res.status(200);
-  res.json({ authenticated: true });
+  res.json({ authenticationRequired: false });
 });
 
-app.get('/api/not-authenticated', (req, res) => {
+// The '/api/whoami' endpoint is not noted in the unless configuration, therefore authentication is required
+app.get('/api/whoami', (req, res) => {
   res.status(200);
-  res.json({ notAuthenticated: true });
+  res.json({ authenticationRequired: true });
 });
-
-app.use('/api/unless/', unlessRouter);
 ```
 
-The `/api/authenticated` endpoint returns an authentication error while `/api/not-authenticated` does not because it is exluded with unless.
+The `/api/whoami` endpoint returns an authentication error while the `/api/login` endpoint does not, because it is exluded with unless.
 
-#### With custom status code and/or message
+#### Custom status code and/or message
 
 The ensureAuthenticated middleware can be configured to return another status code and/or message.
 
@@ -70,15 +72,8 @@ const app = express()
 
 app.use(ensureAuthenticated({
   statusCode: 418, // default = 401
-  message: 'I\'m a teapot!', // default = Authentication required
+  message: 'I\'m a teapot!', // default = "Authentication required"
 }));
-
-app.get('/api/authenticated', (req, res) => {
-  res.status(200);
-  res.json({ authenticated: true });
-});
-
-app.use('/api/unless/', unlessRouter);
 ```
 
 #### How do I use this with Passport?
