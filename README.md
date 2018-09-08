@@ -78,7 +78,8 @@ app.use(ensureAuthenticated({
 
 #### How do I use this with Passport?
 
-Take a look at the integration test for some inspiration. I might create a full-blown example in the near future.
+Take a look at the integration test for some inspiration.  
+I have also created a single file example repository using this module: https://github.com/allardvanderouw/express-api-passport-local-mongo-session-example/blob/master/server.js
 
 ## Prior art
 
